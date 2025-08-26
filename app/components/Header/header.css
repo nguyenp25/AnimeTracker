@@ -1,0 +1,16 @@
+.headerContainer{
+    display: flex;
+    background-color: #012154;
+    padding: 20px;
+    width: 100%;
+}
+
+.headerContainer > div {
+    padding: 5px
+}
+
+.logo{
+    margin-left: 100px;
+    flex-basis: 60%;
+}
+
