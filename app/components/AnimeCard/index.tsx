@@ -1,7 +1,7 @@
 import { AnimeList } from "../AnimeCardGrid/index"
 import "./card.css"
 
-type CardProps = {
+export type CardProps = {
   animeListProps : AnimeList[];
 }
 

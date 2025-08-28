@@ -1,10 +1,15 @@
+import { getAnime } from "../AnimeCardGrid"
+import NavBar from "../Navbar";
+import "./intro.css"
 
+export default async function Intro(){
+    let initialDataFetch = await getAnime({ranking_type: "all", limit: 500});
 
-export default function Intro(){
+    console.log(initialDataFetch);
     return (
         <>
-            <h1>Anime Tracker!!!</h1>
-            <img src="/animeclouds.webp" alt="Home Page Picture"></img>
+            <img className="introBackground" src="/animeclouds.webp" alt="Home Page Picture"></img>
+            <NavBar initialData={initialDataFetch}></NavBar>
         </>
     )
 }

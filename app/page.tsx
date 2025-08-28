@@ -9,7 +9,6 @@ export default function Page() {
     <>
         <Header></Header>
         <Intro></Intro>
-        <NavBar></NavBar>
         <div>ALL TIME</div>
         <Grid ranking_type="all" limit={6}></Grid>
         <div>MOVIES</div>
