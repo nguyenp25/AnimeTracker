@@ -1,20 +1,16 @@
 import { AnimeList } from "../AnimeCardGrid/index"
-import "./card.css"
+import "../../styles/card.css"
 
 export type CardProps = {
-  animeListProps : AnimeList[];
+  animeListItem : AnimeList;
 }
 
-export default function Card({animeListProps} : CardProps) {
+export default function Card({animeListItem} : CardProps) {
 
   return (
-    <div className="cardContainer">
-      {animeListProps.map((a) => (
-        <div key={a.id}>
-            <h1>{a.title}</h1>
-            <img src={a.main_picture.medium}></img>
-        </div>
-      ))}
+    <div className="cardContainer" key={animeListItem.id}>
+        <img className="cardImage" src={animeListItem.main_picture.medium}></img>
+        <h1 className="cardTitle">{animeListItem.title}</h1>
     </div>
   );
 }
