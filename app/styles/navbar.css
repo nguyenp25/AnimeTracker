@@ -3,6 +3,7 @@
     background-color: black;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .filterContainer{
@@ -15,15 +16,27 @@
     width: 170px;
     height: 35px;
     border-radius: 5px;
-    outline: 0;
-    border: none;
+    display:flex;
+    align-items: center;
+    cursor: pointer;
 }
 
-.genreDropDownMenu {
+.filterInput > input {
+    background-color: gray;
+    outline: 0;
+    border: none;
+    width: 130px;
+    height: 20px;
+    border-radius: 5px;
+    padding: 0px 0px 0px 10px;
+   
+}
+
+.dropDownMenu {
     background-color: gray;
     border-radius: 5px;
     position: absolute;
-    width: 174px;
+    width: 170px;
     margin-top: 7px;
 }
 
@@ -43,5 +56,16 @@
 .tag:hover{
     background-color: darkgray;
     border-radius: 5px;
+}
+
+.dropDownArrow{
+    /* position: absolute; */
+    width: 14px;
+    height: 14px;
+    fill: white;
+}
+
+::placeholder{
+    color: white;
 }
 
