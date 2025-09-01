@@ -40,12 +40,10 @@ type GridProps = {
 }
 
 export default function Grid({animeList}: GridProps) {
-
-
   return (
     <div className="gridContainer">
       {animeList.map((animeItem) => (
-        <Card animeListItem={animeItem} />
+        <Card key={animeItem.id} animeListItem={animeItem} />
       ))}
     </div>
   );

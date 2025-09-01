@@ -6,7 +6,7 @@ import Grid from "./components/AnimeCardGrid";
 import { getAnime } from "./components/AnimeCardGrid";
 
 export default async function Page() {
-  let initialDataFetch = await getAnime({ranking_type: "all", limit: 50});
+  let initialDataFetch = await getAnime({ranking_type: "all", limit: 54});
   return (
     <>
         <Header></Header>

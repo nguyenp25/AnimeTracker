@@ -1,9 +1,9 @@
 "use client"
 
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import "../../styles/navbar.css"
 import Grid, { AnimeList } from "../AnimeCardGrid";
-
 
 const clientId = process.env.MAL_CLIENT_ID;
 
@@ -26,8 +26,14 @@ export default function NavBar({initialData} : NavBarProps){
     const [yearDropdown, setYearDropDown] = useState(false);
     const [seasonDropdown, setSeasonDropDown] = useState(false);
     const [formatDropdown, setFormatDropDown] = useState(false);
+    const [initialDisplay, setInitialDisplay] = useState(false);
+
     const genreRef = useRef<HTMLDivElement>(null);
+    const yearRef = useRef<HTMLDivElement>(null);
     const seasonRef = useRef<HTMLDivElement>(null);
+    const formatRef = useRef<HTMLDivElement>(null);
+
+    const router = useRouter();
    
     function updateFilters(type: keyof Filters, value:string){
         if(type != "genre"){
@@ -57,15 +63,31 @@ export default function NavBar({initialData} : NavBarProps){
         if(filters.season && filters.season.length > 0) {
             filteredData = filteredData.filter((anime: any) => anime.start_season.season == filters.season);  
         }
+        if(filters.year && filters.year.length > 0) {
+            filteredData = filteredData.filter((anime: any) => anime.start_season.year == filters.year);
+        }
         console.log("filteredDAta: ", filteredData);
 
         setAnimeList(filteredData);
     }
 
     useEffect(() => {
-        console.log("Filters: ", filters);
+    const isEmpty =
+        (!filters.genre || filters.genre.length === 0) &&
+        (!filters.season || filters.season.length === 0) &&
+        (!filters.year || filters.year.length === 0) &&
+        (!filters.format || filters.format.length === 0) &&
+        (!filters.name || filters.name.length === 0);
+
+    setInitialDisplay(isEmpty);
+
+    if (!isEmpty) {
         fetchFilteredAnime();
-    }, [filters]);
+    } else {
+        setAnimeList(initialData);
+    }
+    }, [filters, initialData]);
+
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -74,6 +96,9 @@ export default function NavBar({initialData} : NavBarProps){
             }
             if (seasonRef.current && !seasonRef.current.contains(event.target as Node)) {
                 setSeasonDropDown(false);
+            }
+            if (yearRef.current && !yearRef.current.contains(event.target as Node)) {
+                setYearDropDown(false);
             }
 
         }
@@ -133,10 +158,10 @@ export default function NavBar({initialData} : NavBarProps){
                 </div>}
             </div>
 
-            <div className="filterContainer">
+            <div ref={yearRef} className="filterContainer">
                 <label htmlFor="year">Year</label>
                 <div className="filterInput" onClick={() => setYearDropDown(true)}>
-                    <input id="year" placeholder="Any"></input>
+                    <input id="year" placeholder="Any" ></input>
                     <svg className="dropDownArrow"
                     fill="#000000"
                     version="1.1"
@@ -221,6 +246,13 @@ export default function NavBar({initialData} : NavBarProps){
                 </div>
             </div>  
         </div>
+        {/* {initialDisplay &&
+
+        } */}
+
+
+
+
         <Grid animeList={animeList}></Grid>
         </>
     )
