@@ -20,7 +20,7 @@ async function getSearchedAnime(keyword: string): Promise<AnimeList[]> {
 }
 
 export default async function SearchPage({params}: { params: { search: string}}) {
-  const keyword = params.search;
+  const { search: keyword } = await params;
   let initialDataFetch = await getSearchedAnime(keyword);
 
   return (

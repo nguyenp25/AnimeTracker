@@ -9,6 +9,7 @@
 .cardImage {
     height: 250px;
     width: 180px;
+    object-fit: cover;
 }
 
 

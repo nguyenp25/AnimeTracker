@@ -4,6 +4,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import "../../styles/navbar.css"
 import Grid, { AnimeList } from "../AnimeCardGrid";
+import SearchBar from "../SearchBar";
+import InitialCardGrid from "../InitialCardGrid";
 
 const clientId = process.env.MAL_CLIENT_ID;
 
@@ -112,10 +114,7 @@ export default function NavBar({initialData} : NavBarProps){
         <>
         <div className="navContainer">
             <div className="filterContainer">
-                <label htmlFor="search">Search</label>
-                <div>
-                    <input className="filterInput" id="search"></input>
-                </div>
+                <SearchBar></SearchBar>
             </div>
             <div ref={genreRef} className="filterContainer">
                 <label htmlFor="genre">Genre</label>
@@ -246,14 +245,14 @@ export default function NavBar({initialData} : NavBarProps){
                 </div>
             </div>  
         </div>
-        {/* {initialDisplay &&
+        <div>
+            {/* {initialDisplay ? (
+                <InitialCardGrid></InitialCardGrid>
+            ) : (
+                <Grid animeList={animeList}></Grid>
+            )} */}
+        </div>
 
-        } */}
-
-
-
-
-        <Grid animeList={animeList}></Grid>
         </>
     )
 }
